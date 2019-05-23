@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  hey_you:
+    build: .
+    image: josemazo/hey_you:latest
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/src/app
+    command: python3 hey_you.py
+
+  lint:
+    build: .
+    image: josemazo/hey_you:latest
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/src/app
+    command: flake8
+
+  test:
+    build: .
+    image: josemazo/hey_you:latest
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/src/app
+    command: pytest --cov
