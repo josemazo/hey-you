@@ -19,11 +19,12 @@ def read_config():
     env = Env()
     return {
         'logger': logger,
-        'watch_url': env.str('WATCH_URL'),
-        'twilio_account_sid': env.str('TWILIO_ACCOUNT_SID'),
-        'twilio_auth_token': env.str('TWILIO_AUTH_TOKEN'),
-        'twilio_to': env.str('TWILIO_TO'),
-        'twilio_from': env.str('TWILIO_FROM')
+        'watch_url': env.str('WATCH_URL', 'https://github.com/josemazo/hey_you'),
+        'twilio_account_sid': env.str('TWILIO_ACCOUNT_SID', 'abcdefghijklmnopqrstuvwxyz'),
+        'twilio_auth_token': env.str('TWILIO_AUTH_TOKEN', 'abcdefghijklmnopqrstuvwxyz'),
+        'twilio_to': env.str('TWILIO_TO', '+34600000000'),
+        'twilio_from': env.str('TWILIO_FROM', '+34955000000'),
+        'sleep': env.int('SLEEP', 30)
     }
 
 
@@ -44,7 +45,7 @@ def main(config):
         else:
             config['logger'].info('No luck :(')
 
-        time.sleep(30)
+        time.sleep(config['sleep'])
 
 
 def hey_you(config):
